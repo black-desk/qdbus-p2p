@@ -1,20 +1,11 @@
 cmake_minimum_required(VERSION 3.23 FATAL_ERROR)
 
 project(
-  ProejctTemplate
+  QDBusP2PExample
   VERSION 0.1.0
-  DESCRIPTION "A cpp proejct template"
+  DESCRIPTION "An example about how to use QDBus in peer to peer mode."
   HOMEPAGE_URL "https://github.com/black-desk/cpp-template"
   LANGUAGES CXX)
-
-option(PROEJCTTEMPLATE_BUILD_EXAMPLES "Build examples of ocppi or not."
-       ${PROJECT_IS_TOP_LEVEL})
-
-option(PROEJCTTEMPLATE_ENABLE_TESTING "Enable test of ocppi or not."
-       ${PROJECT_IS_TOP_LEVEL})
-
-option(PROEJCTTEMPLATE_INSTALL "Enable install target or not."
-       ${PROJECT_IS_TOP_LEVEL})
 
 include(./cmake/GitSemver.cmake)
 
@@ -22,12 +13,13 @@ gitsemver(PROJECT_VERSION)
 
 include(./cmake/CPM.cmake)
 
-# use CPMFindPackage and find_package to get dependencies here.
+find_package(
+  Qt5
+  COMPONENTS DBus)
 
 include(./cmake/PFL.cmake)
 
-pfl_init(ENABLE_TESTING ${PROEJCTTEMPLATE_ENABLE_TESTING} BUILD_EXAMPLES
-         ${PROEJCTTEMPLATE_BUILD_EXAMPLES} INSTALL ${PROEJCTTEMPLATE_INSTALL})
+pfl_init()
 
 if(PROEJCTTEMPLATE_ENABLE_TESTING)
   enable_testing()
@@ -39,12 +31,15 @@ pfl_add_library(
   VERSION
   ${PROJECT_VERSION}
   INS
-  ./src/ProjectTemplate/configure.hpp.in
+  ./src/QDBusP2PExample/configure.hpp.in
   SOURCES
-  ./src/ProjectTemplate/hello.hpp
-  ./src/ProjectTemplate/hello.cpp
+  ./src/QDBusP2PExample/Server.hpp
+  ./src/QDBusP2PExample/Server.cpp
+  ./src/QDBusP2PExample/Client.hpp
+  ./src/QDBusP2PExample/Client.cpp
   APPS
-  hello_world
+  server
+  client
   COMPILE_FEATURES
   PUBLIC
   cxx_std_17)

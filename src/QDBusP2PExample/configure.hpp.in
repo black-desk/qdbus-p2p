@@ -1,0 +1,10 @@
+#pragma once
+
+#include <string_view>
+
+namespace QDBusP2PExample
+{
+
+constexpr std::string_view version = "@PROEJCT_VERSION@";
+
+}
