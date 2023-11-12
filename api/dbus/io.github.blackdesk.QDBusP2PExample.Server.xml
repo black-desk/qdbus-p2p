@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/io/github/blackdesk/QDBusP2PExample/Server">
+        <interface name="io.github.blackdesk.QDBusP2PExample.Server">
+                <method name="TestMethod">
+                </method>
+                <signal name="TestSignal">
+                </signal>
+        </interface>
+</node>
