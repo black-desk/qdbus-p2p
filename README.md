@@ -1,3 +1,5 @@
-# CPP template
+# QDBus P2P Example
 
-This is a template of my c++ project.
+This is an example project
+to show how to write a DBus service working
+at p2p mode with QDBus.
