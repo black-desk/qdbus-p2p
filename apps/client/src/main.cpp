@@ -11,7 +11,7 @@ auto main(int argc, char **argv) -> int
         QCoreApplication app(argc, argv);
         initQCoreApplication();
 
-        assert(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
+        Q_ASSERT(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
                 auto conn = QDBusConnection::connectToPeer(
                         "unix:path=" + getPeerToPeerSocketAddress(),
                         "p2p DBus connection to server");
@@ -19,6 +19,7 @@ auto main(int argc, char **argv) -> int
                         qCritical() << conn.name()
                                     << "is not connected:" << conn.lastError();
                         QCoreApplication::exit(-1);
+                        return;
                 }
 
                 auto server =
@@ -30,6 +31,7 @@ auto main(int argc, char **argv) -> int
                 if (!server->isValid()) {
                         qCritical() << server->lastError();
                         QCoreApplication::exit(-1);
+                        return;
                 }
 
                 QObject::connect(server,
@@ -45,6 +47,7 @@ auto main(int argc, char **argv) -> int
                 if (reply.isError()) {
                         qCritical() << "TestMethod error.";
                         QCoreApplication::exit(-1);
+                        return;
                 }
         }));
 

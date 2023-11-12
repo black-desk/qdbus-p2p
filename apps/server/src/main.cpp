@@ -17,9 +17,10 @@ auto main(int argc, char **argv) -> int
 
         initQCoreApplication();
 
-        assert(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
+        Q_ASSERT(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
                 auto server = new Server(QCoreApplication::instance());
-                new ServerAdaptor(server);
+                auto adaptor = new ServerAdaptor(server);
+                Q_UNUSED(adaptor);
 
                 auto address = getPeerToPeerSocketAddress();
                 auto dirname = QDir::root().relativeFilePath(
@@ -31,6 +32,7 @@ auto main(int argc, char **argv) -> int
                                 << QString("mkpath \"%1\" failed.")
                                            .arg("/" + dirname);
                         QCoreApplication::exit(-1);
+                        return;
                 }
 
                 auto qDBusServer = new QDBusServer(
