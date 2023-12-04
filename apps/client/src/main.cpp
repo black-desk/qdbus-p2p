@@ -11,7 +11,7 @@ auto main(int argc, char **argv) -> int
         QCoreApplication app(argc, argv);
         initQCoreApplication();
 
-        Q_ASSERT(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
+        auto ret = QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
                 auto conn = QDBusConnection::connectToPeer(
                         "unix:path=" + getPeerToPeerSocketAddress(),
                         "p2p DBus connection to server");
@@ -49,7 +49,9 @@ auto main(int argc, char **argv) -> int
                         QCoreApplication::exit(-1);
                         return;
                 }
-        }));
+        });
+
+        Q_ASSERT(ret);
 
         return QCoreApplication::exec();
 }

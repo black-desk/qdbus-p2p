@@ -17,7 +17,7 @@ auto main(int argc, char **argv) -> int
 
         initQCoreApplication();
 
-        Q_ASSERT(QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
+        auto ret = QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
                 auto server = new Server(QCoreApplication::instance());
                 auto adaptor = new ServerAdaptor(server);
                 Q_UNUSED(adaptor);
@@ -77,7 +77,9 @@ auto main(int argc, char **argv) -> int
                                                         "/io/github/blackdesk/QDBusP2PExample/Server");
                                         });
                         });
-        }));
+        });
+
+        Q_ASSERT(ret);
 
         return QCoreApplication::exec();
 }
