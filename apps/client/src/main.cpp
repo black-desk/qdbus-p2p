@@ -42,7 +42,7 @@ auto main(int argc, char **argv) -> int
                                          QCoreApplication::exit();
                                  });
 
-                auto reply = server->TestMethod();
+                auto reply = server->TestMethod({ { "a", "b" } });
                 reply.waitForFinished();
                 if (reply.isError()) {
                         qCritical() << "TestMethod error.";

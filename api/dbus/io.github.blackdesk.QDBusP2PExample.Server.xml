@@ -3,6 +3,10 @@
 <node name="/io/github/blackdesk/QDBusP2PExample/Server">
         <interface name="io.github.blackdesk.QDBusP2PExample.Server">
                 <method name="TestMethod">
+                        <arg direction="in" name="parameters" type="a{sv}" />
+                        <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QVariantMap" />
+                        <arg direction="out" name="result" type="a{sv}" />
+                        <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap" />
                 </method>
                 <signal name="TestSignal">
                 </signal>

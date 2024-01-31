@@ -5,11 +5,11 @@
 namespace QDBusP2PExample
 {
 
-void Server::TestMethod()
+QVariantMap Server::TestMethod(const QVariantMap &parameters)
 {
-        qInfo() << "method called";
+        qInfo() << "method called" << parameters;
         this->TestSignal();
-        return;
+        return {};
 }
 
 }
