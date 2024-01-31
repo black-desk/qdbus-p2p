@@ -18,8 +18,9 @@ auto main(int argc, char **argv) -> int
         initQCoreApplication();
 
         auto ret = QMetaObject::invokeMethod(QCoreApplication::instance(), []() {
-                auto server = new Server(QCoreApplication::instance());
-                auto adaptor = new ServerAdaptor(server);
+                auto server = // NOLINT
+                        new Server(QCoreApplication::instance());
+                auto adaptor = new ServerAdaptor(server); // NOLINT
                 Q_UNUSED(adaptor);
 
                 auto address = getPeerToPeerSocketAddress();
@@ -35,7 +36,7 @@ auto main(int argc, char **argv) -> int
                         return;
                 }
 
-                auto qDBusServer = new QDBusServer(
+                auto qDBusServer = new QDBusServer( // NOLINT
                         "unix:path=" + address, QCoreApplication::instance());
                 if (!qDBusServer->isConnected()) {
                         qCritical() << "QDBusServer not connected:"
