@@ -68,7 +68,7 @@ auto main(int argc, char **argv) -> int
                 QList<QDBusConnection> connections;
                 QObject::connect(
                         qDBusServer, &QDBusServer::newConnection,
-                        [server](QDBusConnection conn) noexcept {
+                        [server](const QDBusConnection &conn) noexcept {
                                 auto res = registerDBusObject(
                                         conn,
                                         "/io/github/blackdesk/QDBusP2PExample/Server",
