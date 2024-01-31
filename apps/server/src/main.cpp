@@ -43,6 +43,14 @@ auto main(int argc, char **argv) -> int
                                     << qDBusServer->lastError();
                         QCoreApplication::exit(-1);
                 }
+
+                // NOTE:
+                // When other user connect to this message bus,
+                // that connection will be closed immediately in libdbus
+                // if we do not allow anonymous auth.
+                // I have no idea about what is going on in that library.
+                qDBusServer->setAnonymousAuthenticationAllowed(true);
+
                 QObject::connect(
                         QCoreApplication::instance(),
                         &QCoreApplication::aboutToQuit, [address]() {
