@@ -44,7 +44,9 @@ auto main(int argc, char **argv) -> int
 
                 QJsonObject object;
                 object.insert("a", "b");
-                auto reply = server->TestMethod(object.toVariantMap());
+                QJsonObject object1;
+                object1.insert("b", object);
+                auto reply = server->TestMethod(object1.toVariantMap());
                 reply.waitForFinished();
                 if (reply.isError()) {
                         qCritical() << "TestMethod error.";

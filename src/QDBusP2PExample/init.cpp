@@ -4,7 +4,9 @@
 #include <initializer_list>
 
 #include <QCoreApplication>
+#include <QDBusArgument>
 #include <QDebug>
+#include <QJsonObject>
 
 #include "QDBusP2PExample/configure.hpp"
 
@@ -16,7 +18,8 @@ namespace
 void catchUnixSignals(std::initializer_list<int> quitSignals)
 {
         auto handler = [](int sig) -> void {
-                qInfo().noquote() << QString("Quit the application by signal(%1).")
+                qInfo().noquote()
+                        << QString("Quit the application by signal(%1).")
                                    .arg(sig);
                 QCoreApplication::quit();
         };
