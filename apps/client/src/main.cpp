@@ -42,13 +42,16 @@ auto main(int argc, char **argv) -> int
                                          QCoreApplication::exit();
                                  });
 
-                auto reply = server->TestMethod({ { "a", "b" } });
+                QJsonObject object;
+                object.insert("a", "b");
+                auto reply = server->TestMethod(object.toVariantMap());
                 reply.waitForFinished();
                 if (reply.isError()) {
                         qCritical() << "TestMethod error.";
                         QCoreApplication::exit(-1);
                         return;
                 }
+                qInfo() << "reply:" << reply.value();
         });
 
         Q_ASSERT(ret);
